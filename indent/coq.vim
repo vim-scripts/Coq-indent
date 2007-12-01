@@ -3,7 +3,8 @@
 " Maintainer: 	Vincent Aravantinos <vincent.aravantinos@gmail.com>
 " Thanks:       Some functions were inspired by the ocaml indent file
 "               written by Jean-Francois Yuen, Mike Leary and Markus Mottl
-" Last Change: 2007 Nov 28 - Handle proofs that do not start with 'Proof'.
+" Last Change: 2007 Dec 2  - Bugfix.
+"              2007 Nov 28 - Handle proofs that do not start with 'Proof'.
 "              2007 Nov 27 - Initial version. 
 
 " Only load this indent file when no other was loaded.
@@ -123,7 +124,7 @@ let s:tactic = '\C\<\%(absurd\|apply\|assert\|assumption\|auto\|case_eq\|change\
 
         " back to normal indent after lines ending with '.'
       elseif previousline =~ '\.$'
-        if (synIDattr(synID(line('.')-1,col('.'),0),"name") =~? '\cproof')
+        if (synIDattr(synID(line('.')-1,col('.'),0),"name") =~? '\cproof\|tactic')
           return ind
         else
           return s:indent_of_previous(s:vernac)
